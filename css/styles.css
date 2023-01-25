@@ -1,0 +1,17 @@
+*{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+#my-nav{
+    background-color: #f6f6f6;
+}
+
+
+h2{
+    font-size: 2rem;
+    padding-left: 4rem;
+    padding-top: 2rem;
+}
+
