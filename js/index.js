@@ -26,9 +26,14 @@ function Alumnos(nombre, nota, nota2, nota3, res) {
   this.nota2 = nota2;
   this.nota3 = nota3;
   this.res = res;
+}
+
+let alumno = new Alumnos(Alumnos.nombre, Alumnos.res);
+console.log(alumno);
 
 
-  let inputs = document.querySelectorAll('input');
+
+let inputs = document.querySelectorAll('input');
 
   inputs.forEach(element => {
     element.addEventListener('change', () => {
@@ -113,51 +118,46 @@ function Alumnos(nombre, nota, nota2, nota3, res) {
     console.log(lsData)
     
   })
+
+
+
+let bd = [{
+  "id": 1,
+  "nombre": alumno.nombre,
+  "promedio": alumno.res,
+},
+{
+  "id": 2,
+  "nombre": "Lucas",
+  "promedio": 7,
+},
+{
+  "id": 3,
+  "nombre": "Sheila",
+  "promedio": 7.5
+},
+{
+  "id": 4,
+  "nombre": "Leo",
+  "promedio": 8
+},
+{
+  "id": 5,
+  "nombre": "Kelpi",
+  "promedio": 9.5
+},
+{
+  "id": 6,
+  "nombre": "Pollo",
+  "promedio": 7.5
 }
 
-
-let alumno = new Alumnos(Alumnos.nombre, Alumnos.res);
-
-
-// bd
-
-// let bd = [{
-//   "id": 1,
-//   "nombre": alumno.nombre,
-//   "promedio": alumno.res,
-// },
-// {
-//   "id": 2,
-//   "nombre": "Lucas",
-//   "promedio": 7,
-// },
-// {
-//   "id": 3,
-//   "nombre": "Sheila",
-//   "promedio": 7.5
-// },
-// {
-//   "id": 4,
-//   "nombre": "Leo",
-//   "promedio": 8
-// },
-// {
-//   "id": 5,
-//   "nombre": "Kelpi",
-//   "promedio": 9.5
-// },
-// {
-//   "id": 6,
-//   "nombre": "Pollo",
-//   "promedio": 7.5
-// }
-
-// ]
+]
 
 
-fetch('https://jsonplaceholder.typicode.com/users')
-      .then(response => response.json())
-      .then(json => console.log(json))
+// fetch('https://jsonplaceholder.typicode.com/users')
+//       .then(response => response.json())
+//       .then(json => console.log(json))
 
 
      
