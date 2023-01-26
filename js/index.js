@@ -37,29 +37,39 @@ function Alumnos(nombre, nota, nota2, nota3, res) {
       nota2 = notaAlumno2.value;
       nota3 = notaAlumno3.value;
 
-      nota > 10 ? error[1].innerHTML = "sos pelotudo" : error[1].innerHTML = ""
-      nota2 > 10 ? error[2].innerHTML = "sos pelotudo" : error[2].innerHTML = ""
-      nota3 > 10 ? error[3].innerHTML = "sos pelotudo" : error[3].innerHTML = ""
-
-
-
       res = (Math.floor(nota) + Math.floor(nota2) + Math.floor(nota3)) / 3;
+
+      const validacion = () => {
+        nota > 10 ? error[1].innerHTML = "Error! Debes ingresar un número entre 1 y 10 inclusive" : error[1].innerHTML = ""
+        nota2 > 10 ? error[2].innerHTML = "Error! Debes ingresar un número entre 1 y 10 inclusive" : error[2].innerHTML = ""
+        nota3 > 10 ? error[3].innerHTML = "Error! Debes ingresar un número entre 1 y 10 inclusive" : error[3].innerHTML = ""
+    
+    
+      
+      
+        if (isNaN(nota)) {
+          console.log("Los campos deben ser de formato numérico");
+          return false;
+        } else if(!isNaN(nota)){
+          console.log("ok");
+        }
+      }
+    
+    
+      validacion();
     })
   });
+
+
 
   calcularBtn.addEventListener("click", (e) => {
     e.preventDefault();
 
+    
+
 
     while (cont < 2) {
-      // mostrarDatos.innerHTML = `¡Hola ${nombre}! tus notas son:
-      // <li>Primer nota: ${nota} </li>
-      // <li>Segunda nota: ${nota2} </li>
-      // <li>Tercer nota: ${nota3} </li>
-
-      // <p>y tu promedio es: ${res} </p>  `
-
-
+     
       mostrarDatos.innerHTML = `
 
       <h3 class="py-2">¡Hola ${nombre}!</h3>
@@ -90,120 +100,67 @@ function Alumnos(nombre, nota, nota2, nota3, res) {
           </div>
         </li>
     </ul>`
-
-
-
       console.log(cont);
       cont++;
     }
 
 
+    
+    // datos guardados en LS
 
-
-
-    // if(typeof nombre !== 'string' || nombre !== ""){
-    //   console.log("SOS LA BESTIA INETERA");
-    // }
-
-    // while (cont < 2) {
-
-    //   nombre = nombreAlumno.value;
-    //   nota = notaAlumno.value;
-    //   nota2 = notaAlumno2.value;
-    //   nota3 = notaAlumno3.value;
-
-    //   console.log(nota2)
-
-    //   // calculo de promedio
-
-    //   this.res = (Math.floor(nota) + Math.floor(nota2) + Math.floor(nota3)) / 3;
-
-
-    //   if (Math.floor(notaAlumno.value) > 10) {
-    //     console.log("Los campos deben ser completados por un número válido entre 1 al 10");
-    //     return false;
-    //   }
-    //   if (Math.floor(nota2) > 10) {
-    //     console.log("Los campos deben ser completados por un número válido entre 1 al 10");
-    //     return false;
-    //   }
-    //   if (Math.floor(nota3) > 10) {
-    //     console.log("Los campos deben ser completados por un número válido entre 1 al 10");
-    //     return false;
-    //   }
-
-
-    //   // datos guardados en LS
-
-    //   localStorage.setItem(nombre, this.res);
-    //   var lsData = localStorage.getItem(this.nombre, this.res);
-    //   console.log(lsData)
-
-
-
-    //   if (isNaN(this.res)) {
-    //     console.log("Los campos deben ser de formato numérico");
-    //     return false;
-    //   } else if (this.res >= 7) {
-    //     console.log(`Tu promedio es: ${this.res} felicidades sos un héroe!`);
-    //   } else {
-    //     console.log(`Tu promedio es: ${this.res} sos un asistente!`);
-    //   }
-
-
-
-    //   const mostrarPromedio = document.querySelector('.tuPromedio');
-    //   console.log(mostrarPromedio);
-
-    //   mostrarPromedio.innerHTML = `${nombre} tu promedio es ${this.res}`;
-
-    //   cont++;
-    // }
+    localStorage.setItem(nombre, res);
+    var lsData = localStorage.getItem(this.nombre, this.res);
+    console.log(lsData)
+    
   })
 }
 
 
 let alumno = new Alumnos(Alumnos.nombre, Alumnos.res);
-nombre.innerHTML = `Alumno: ${alumno.nombre}`;
-promedio.innerHTML = `Tu promedio es: ${alumno.res}`;
-
 
 
 // bd
 
-let bd = [{
-  "id": 1,
-  "nombre": alumno.nombre,
-  "promedio": alumno.res,
-},
-{
-  "id": 2,
-  "nombre": "Lucas",
-  "promedio": 7,
-},
-{
-  "id": 3,
-  "nombre": "Sheila",
-  "promedio": 7.5
-},
-{
-  "id": 4,
-  "nombre": "Leo",
-  "promedio": 8
-},
-{
-  "id": 5,
-  "nombre": "Kelpi",
-  "promedio": 9.5
-},
-{
-  "id": 6,
-  "nombre": "Pollo",
-  "promedio": 7.5
-}
+// let bd = [{
+//   "id": 1,
+//   "nombre": alumno.nombre,
+//   "promedio": alumno.res,
+// },
+// {
+//   "id": 2,
+//   "nombre": "Lucas",
+//   "promedio": 7,
+// },
+// {
+//   "id": 3,
+//   "nombre": "Sheila",
+//   "promedio": 7.5
+// },
+// {
+//   "id": 4,
+//   "nombre": "Leo",
+//   "promedio": 8
+// },
+// {
+//   "id": 5,
+//   "nombre": "Kelpi",
+//   "promedio": 9.5
+// },
+// {
+//   "id": 6,
+//   "nombre": "Pollo",
+//   "promedio": 7.5
+// }
 
-]
+// ]
 
+
+fetch('https://jsonplaceholder.typicode.com/users')
+      .then(response => response.json())
+      .then(json => console.log(json))
+
+
+     
 
 let db = [...bd];
 
@@ -213,15 +170,13 @@ let db = [...bd];
 
 const usuariosBtn = document.querySelector('.salonFama');
 
-console.log(usuariosBtn);
-
 
 usuariosBtn.addEventListener("click", () => {
   let listadoUsuarios = db.map(function (user) {
-    return '<li>' + user.nombre + '</li>';
+    return '<li class="list-group-item">' + user.nombre + '</li>';
   })
 
-  document.getElementById('users').innerHTML = listadoUsuarios.join('');
+  document.querySelector('.users').innerHTML = listadoUsuarios.join('');
 })
 
 
