@@ -28,10 +28,6 @@ function Alumnos(nombre, nota, nota2, nota3, res) {
   this.res = res;
 }
 
-let alumno = new Alumnos(Alumnos.nombre, Alumnos.res);
-console.log(alumno);
-
-
 
 let inputs = document.querySelectorAll('input');
 
@@ -56,21 +52,20 @@ let inputs = document.querySelectorAll('input');
           console.log("Los campos deben ser de formato numérico");
           return false;
         } else if(!isNaN(nota)){
-          console.log("ok");
+          // console.log("ok");
         }
       }
     
     
       validacion();
+      let alumno = new Alumnos(nombre, res);
     })
   });
 
-
+ 
 
   calcularBtn.addEventListener("click", (e) => {
     e.preventDefault();
-
-    
 
 
     while (cont < 2) {
@@ -105,7 +100,6 @@ let inputs = document.querySelectorAll('input');
           </div>
         </li>
     </ul>`
-      console.log(cont);
       cont++;
     }
 
@@ -114,69 +108,70 @@ let inputs = document.querySelectorAll('input');
     // datos guardados en LS
 
     localStorage.setItem(nombre, res);
-    var lsData = localStorage.getItem(this.nombre, this.res);
-    console.log(lsData)
+    var lsData = localStorage.getItem(this.nombre, this.res);    
+   
+
+    bd = [{
+      "id": 1,
+      "nombre": this.nombre,
+      "promedio": this.res,
+    },
+    {
+      "id": 2,
+      "nombre": "Lucas",
+      "promedio": 7,
+    },
+    {
+      "id": 3,
+      "nombre": "Sheila",
+      "promedio": 7.5
+    },
+    {
+      "id": 4,
+      "nombre": "Leo",
+      "promedio": 8
+    },
+    {
+      "id": 5,
+      "nombre": "Kelpi",
+      "promedio": 9.5
+    },
+    {
+      "id": 6,
+      "nombre": "Pollo",
+      "promedio": 7.5
+    }
     
+    ]
+    
+    
+    // fetch('https://jsonplaceholder.typicode.com/users')
+    //       .then(response => response.json())
+    //       .then(json => console.log(json))
+    
+    
+         
+    
+    let db = [...bd];
+    
+    
+    
+    // Mostrar listado de alumnos
+    
+    const usuariosBtn = document.querySelector('.salonFama');
+    
+    
+    usuariosBtn.addEventListener("click", () => {
+      let listadoUsuarios = db.map(function (user) {
+        return '<li class="list-group-item">' + user.nombre + '</li>';
+      })
+    
+      document.querySelector('.users').innerHTML = listadoUsuarios.join('');
+    })
   })
 
 
 
-let bd = [{
-  "id": 1,
-  "nombre": alumno.nombre,
-  "promedio": alumno.res,
-},
-{
-  "id": 2,
-  "nombre": "Lucas",
-  "promedio": 7,
-},
-{
-  "id": 3,
-  "nombre": "Sheila",
-  "promedio": 7.5
-},
-{
-  "id": 4,
-  "nombre": "Leo",
-  "promedio": 8
-},
-{
-  "id": 5,
-  "nombre": "Kelpi",
-  "promedio": 9.5
-},
-{
-  "id": 6,
-  "nombre": "Pollo",
-  "promedio": 7.5
-}
 
-]
-
-
-// fetch('https://jsonplaceholder.typicode.com/users')
-//       .then(response => response.json())
-//       .then(json => console.log(json))
-
-
-     
-
-let db = [...bd];
-
-
-
-// Mostrar listado de alumnos
-
-const usuariosBtn = document.querySelector('.salonFama');
-
-
-usuariosBtn.addEventListener("click", () => {
-  let listadoUsuarios = db.map(function (user) {
-    return '<li class="list-group-item">' + user.nombre + '</li>';
-  })
-
-  document.querySelector('.users').innerHTML = listadoUsuarios.join('');
-})
 
 
