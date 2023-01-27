@@ -1,17 +1,18 @@
-let arr = [];
-let nota = 0;
-let cont = 1;
-let res = 0;
+let arr = [],
+    nota = 0, 
+    cont = 1,
+     res = 0;
 
 
-let nombreAlumno = document.querySelector('#nombreAlumno');
-let notaAlumno = document.querySelector('#notaAlumno');
-let notaAlumno2 = document.querySelector('#notaAlumno2');
-let notaAlumno3 = document.querySelector('#notaAlumno3');
-let calcularBtn = document.querySelector('#calcularBtn');
-let formulario = document.querySelector('form');
-let mostrarDatos = document.querySelector('.mostrarDatos');
-let error = document.querySelectorAll('.error');
+const nombreAlumno = document.querySelector('#nombreAlumno'),
+      notaAlumno = document.querySelector('#notaAlumno'),
+      notaAlumno2 = document.querySelector('#notaAlumno2'),
+      notaAlumno3 = document.querySelector('#notaAlumno3'),
+      calcularBtn = document.querySelector('#calcularBtn'),
+      formulario = document.querySelector('form'),
+      mostrarDatos = document.querySelector('.mostrarDatos'),
+      error = document.querySelectorAll('.error'),
+      usuarios = document.querySelector('.users')
 
 formulario.addEventListener("submit", (e) => {
   e.preventDefault();
@@ -109,50 +110,6 @@ let inputs = document.querySelectorAll('input');
 
     localStorage.setItem(nombre, res);
     var lsData = localStorage.getItem(this.nombre, this.res);    
-   
-
-    bd = [{
-      "id": 1,
-      "nombre": this.nombre,
-      "promedio": this.res,
-    },
-    {
-      "id": 2,
-      "nombre": "Lucas",
-      "promedio": 7,
-    },
-    {
-      "id": 3,
-      "nombre": "Sheila",
-      "promedio": 7.5
-    },
-    {
-      "id": 4,
-      "nombre": "Leo",
-      "promedio": 8
-    },
-    {
-      "id": 5,
-      "nombre": "Kelpi",
-      "promedio": 9.5
-    },
-    {
-      "id": 6,
-      "nombre": "Pollo",
-      "promedio": 7.5
-    }
-    
-    ]
-    
-    
-    // fetch('https://jsonplaceholder.typicode.com/users')
-    //       .then(response => response.json())
-    //       .then(json => console.log(json))
-    
-    
-         
-    
-    let db = [...bd];
     
     
     
@@ -162,16 +119,36 @@ let inputs = document.querySelectorAll('input');
     
     
     usuariosBtn.addEventListener("click", () => {
-      let listadoUsuarios = db.map(function (user) {
-        return '<li class="list-group-item">' + user.nombre + '</li>';
-      })
-    
-      document.querySelector('.users').innerHTML = listadoUsuarios.join('');
+
+      fetch('https://fakerapi.it/api/v1/persons?_quantity=20')
+      .then(response => response.json())
+      .then(data => { 
+        const personas = data.data;
+
+        let listadoUsuarios = personas.map(function (user) {
+          return `<li class="list-group-item"> <span class="fw-bolder">Nombre:</span> ${user.firstname} - <span class="fw-bolder">Email:</span> ${user.email} </li>`;
+        })
+      
+        listadoUsuarios.sort();
+
+        usuarios.innerHTML = listadoUsuarios.join('');
+    })
     })
   })
+ 
 
 
+  
+    
 
+     
+
+   
+  
+
+
+  
+ 
 
 
 
