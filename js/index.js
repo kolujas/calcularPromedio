@@ -63,12 +63,10 @@ let inputs = document.querySelectorAll('input');
     })
   });
 
- 
+
 
   calcularBtn.addEventListener("click", (e) => {
     e.preventDefault();
-
-
     while (cont < 2) {
      
       mostrarDatos.innerHTML = `
@@ -103,13 +101,34 @@ let inputs = document.querySelectorAll('input');
     </ul>`
       cont++;
     }
-
-
+    
     
     // datos guardados en LS
 
-    localStorage.setItem(nombre, res);
-    var lsData = localStorage.getItem(this.nombre, this.res);    
+
+    const mostrarLS = () => {
+      localStorage.setItem(nombre, res);
+    var lsData = localStorage.getItem(this.nombre, this.res); 
+
+      let mostrarStorage = document.querySelector('.storageContent')
+      mostrarStorage.innerHTML = `<button class="btn btn-primary col" id="mostrarStorage">Ver mi promedio</button>`
+
+      let mostrarStorageBtn = document.querySelector('#mostrarStorage');
+      
+      mostrarStorageBtn.addEventListener("click", () => {
+        Swal.fire({
+          title: `Hola ${this.nombre}`,
+          text: `Tu promedio es ${lsData}`,
+          icon: 'info',
+          confirmButtonText: 'Aceptar'
+        })
+      })
+    }
+
+    mostrarLS();
+
+
+       
     
     
     
@@ -136,10 +155,9 @@ let inputs = document.querySelectorAll('input');
     })
   })
  
-
-
   
-    
+
+ 
 
      
 
